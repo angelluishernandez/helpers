@@ -1,0 +1,13 @@
+.NavbarComponent{
+  background-color: $nav-color;
+  padding:0 18vw;
+  justify-content: space-between; 
+  width: 100%;  
+  a{
+    color: $title-color; 
+    text-decoration: none;
+  }
+
+
+  
+}
