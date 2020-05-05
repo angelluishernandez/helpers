@@ -43,8 +43,8 @@ const DashboardCard = ({ image, title, body, action }) => {
 					component="img"
 				/>
 				<Typography
-					variant="h3"
-					component="h3"
+					variant="h4"
+					component="h4"
 					className={`card-typography ${classes.title} mt-3`}
 				>
 					{title}

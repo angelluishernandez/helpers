@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
 import Login from "./Login";
+import Signup from "../signin/Singin";
 
-const LoginModal = ({ modalIsOpen, closeModal }) => {
+const LoginModal = ({ modalIsOpen, closeModal, isLogin }) => {
 	return (
 		<Modal
 			className="LoginModal"
@@ -12,7 +13,7 @@ const LoginModal = ({ modalIsOpen, closeModal }) => {
 			onRequestClose={() => closeModal()}
 			closeTimeoutMS={200}
 		>
-			<Login />
+			{isLogin ? <Login /> : <Signup />}
 		</Modal>
 	);
 };

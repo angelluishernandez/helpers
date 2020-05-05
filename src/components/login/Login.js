@@ -16,7 +16,6 @@ const Login = () => {
 		});
 		setUsername();
 		setPassword();
-		console.log(user);
 	};
 
 	return (

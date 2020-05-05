@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import MainContainer from "./MainContainer";
 import DashboardCard from "./DashBoardCard";
@@ -34,7 +33,7 @@ const Dashboard = () => {
 				<Grid item xs={12} className={`${classes.margin}`}>
 					<ActionCall body={"Everything you need in one place"} />
 				</Grid>
-
+				<hr />
 				<Grid item xs={6}>
 					<DashboardCard
 						image={"work.svg"}

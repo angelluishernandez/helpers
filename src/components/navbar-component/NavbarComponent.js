@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import LoginModal from "../login/LoginModal";
 
 const NavbarComponent = () => {
+	const [modalIsOpen, setIsOpen] = useState(false);
+
+	function openModal() {
+		setIsOpen(true);
+	}
+	function closeModal() {
+		setIsOpen(false);
+	}
+
 	return (
 		<nav className="navbar navbar-expand-lg NavbarComponent">
 			<a className="navbar-brand" href="#">
@@ -31,6 +41,16 @@ const NavbarComponent = () => {
 					</li>
 				</ul>
 			</div>
+			<div className="signin">
+				<button className="button" onClick={() => openModal()}>
+					Sign in
+				</button>
+			</div>
+			<LoginModal
+				isLogin={true}
+				closeModal={closeModal}
+				modalIsOpen={modalIsOpen}
+			/>
 		</nav>
 	);
 };

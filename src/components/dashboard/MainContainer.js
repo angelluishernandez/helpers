@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
 
 import LoginModal from "../login/LoginModal";
 const MainContainer = ({ useStyles }) => {
@@ -14,7 +13,11 @@ const MainContainer = ({ useStyles }) => {
 
 	return (
 		<div>
-			<LoginModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
+			<LoginModal
+				closeModal={closeModal}
+				modalIsOpen={modalIsOpen}
+				isLogin={false}
+			/>
 			<div className="row">
 				<div className="main-container__container col-md-4 mt-5">
 					<h3 className="main-container__title">
