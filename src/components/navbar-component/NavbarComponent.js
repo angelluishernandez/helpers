@@ -13,9 +13,7 @@ const NavbarComponent = () => {
 
 	return (
 		<nav className="navbar navbar-expand-lg NavbarComponent">
-			<a className="navbar-brand" href="#">
-				Helpers
-			</a>
+			<img src="logo.svg" alt="logo" className="logo" />
 			<button
 				className="navbar-toggler"
 				type="button"

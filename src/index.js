@@ -9,9 +9,9 @@ import { firebase } from "./firebase/firebase";
 import UserProvider from "./contexts/user.context";
 
 ReactDOM.render(
-	// <UserProvider>
-	<App />,
-	// </UserProvider>
+	<UserProvider>
+		<App />
+	</UserProvider>,
 	document.getElementById("root")
 );
 
