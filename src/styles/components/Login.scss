@@ -1,0 +1,34 @@
+.LoginModal{
+  background: $main-background;
+  color:$title-color;
+  max-width: 30rem;
+  outline: none;
+  padding: 3.2rem;
+  text-align: center;
+
+}
+
+.Login__name{
+  
+}
+
+
+
+.ReactModalPortal .ReactModal__Overlay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 200ms ease-in-out;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+.ReactModalPortal .ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+
+.social-login{
+  height: 30px;
+}
+
