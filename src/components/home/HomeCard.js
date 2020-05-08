@@ -30,11 +30,11 @@ const useStyles = makeStyles({
 	},
 });
 
-const DashboardCard = ({ image, title, body, action }) => {
+const HomeCard = ({ image, title, body, action }) => {
 	const classes = useStyles();
 
 	return (
-		<Card className={`${classes.root} DashboardCard ${classes.center}`}>
+		<Card className={`${classes.root} HomeCard ${classes.center}`}>
 			<CardActionArea className={classes.center}>
 				<CardMedia
 					className={classes.media}
@@ -60,10 +60,10 @@ const DashboardCard = ({ image, title, body, action }) => {
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
-				<button class="button">{action}</button>
+				<button className="button">{action}</button>
 			</CardActions>
 		</Card>
 	);
 };
 
-export default DashboardCard;
+export default HomeCard;

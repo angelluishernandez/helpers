@@ -1,9 +1,8 @@
 import React from "react";
 import Modal from "react-modal";
-import Login from "./Login";
-import Signup from "../signin/Singin";
+import UserForm from "../forms/UserForm";
 
-const LoginModal = ({ modalIsOpen, closeModal, isLogin }) => {
+const AuthModal = ({ closeModal, modalIsOpen, isLogin }) => {
 	return (
 		<Modal
 			className="LoginModal"
@@ -13,9 +12,9 @@ const LoginModal = ({ modalIsOpen, closeModal, isLogin }) => {
 			onRequestClose={() => closeModal()}
 			closeTimeoutMS={200}
 		>
-			{isLogin ? <Login /> : <Signup />}
+			<UserForm isLogin={isLogin} />
 		</Modal>
 	);
 };
 
-export default LoginModal;
+export default AuthModal;

@@ -1,61 +1,20 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import MainContainer from "./MainContainer";
-import DashboardCard from "./DashBoardCard";
-import ActionCall from "./ActionCall";
+import { firebase } from "../../firebase/firebase";
+import { history } from "../../App";
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	paper: {
-		padding: theme.spacing(2),
-		textAlign: "center",
-		color: "#fcefee",
-	},
-	margin: {
-		marginTop: "10vh",
-		marginBottom: "10vh",
-	},
-}));
-
-const Dashboard = () => {
-	const classes = useStyles();
-
+const Dashboard = ({ firebaseAuth }) => {
+	const doSignOut = () => {
+		firebase
+			.auth()
+			.signOut()
+			.then(() => history.push("/"));
+	};
 	return (
-		<div className={`container Dashboard ${classes.root} pt-5`}>
-			<Grid container spacing={3}>
-				<Grid item xs={12}>
-					<MainContainer useStyles={useStyles} />
-				</Grid>
-
-				<Grid item xs={12} className={`${classes.margin}`}>
-					<ActionCall body={"Everything you need in one place"} />
-				</Grid>
-				<hr />
-				<Grid item xs={6}>
-					<DashboardCard
-						image={"work.svg"}
-						title={"Get more done with less"}
-						body={
-							"Create rich and powerfull workflows in simple steps. With this information you can store what you are learning to consult it later"
-						}
-						action={"Check it out"}
-					/>
-				</Grid>
-				<Grid item xs={6}>
-					<DashboardCard
-						image={"cards.svg"}
-						title={"Get more productive with...."}
-						body={
-							"Create rich and powerfull workflows in simple steps. With this information you can store what you are learning to consult it later"
-						}
-						action={"Check it out"}
-					/>
-				</Grid>
-				<Grid item xs={12} className={`${classes.margin}`}></Grid>
-			</Grid>
+		<div>
+			<button className="btn btn-primary">Hello</button>
+			<button className="btn btn-danger" onClick={doSignOut}>
+				Sign Out
+			</button>
 		</div>
 	);
 };

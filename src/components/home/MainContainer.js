@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import AuthModal from "../authmodal/AuthModal";
 
-import LoginModal from "../login/LoginModal";
 const MainContainer = ({ useStyles }) => {
 	const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -13,7 +13,7 @@ const MainContainer = ({ useStyles }) => {
 
 	return (
 		<div>
-			<LoginModal
+			<AuthModal
 				closeModal={closeModal}
 				modalIsOpen={modalIsOpen}
 				isLogin={false}

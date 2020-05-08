@@ -6,7 +6,7 @@ const ActionCall = ({ body }) => {
 			<div className="col-md-2"></div>
 			<div className="col-md-2">
 				<h3>{body}</h3>
-				<button class="button">Do it</button>
+				<button className="button">Do it</button>
 			</div>
 			<div className="col-md-2"></div>
 			<div className="col-md-4 action-container">

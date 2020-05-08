@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginModal from "../login/LoginModal";
+import AuthModal from "../authmodal/AuthModal";
 
 const NavbarComponent = () => {
 	const [modalIsOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ const NavbarComponent = () => {
 	function closeModal() {
 		setIsOpen(false);
 	}
-
+	console.log("entra");
 	return (
 		<nav className="navbar navbar-expand-lg NavbarComponent">
 			<img src="logo.svg" alt="logo" className="logo" />
@@ -44,7 +44,7 @@ const NavbarComponent = () => {
 					Sign in
 				</button>
 			</div>
-			<LoginModal
+			<AuthModal
 				isLogin={true}
 				closeModal={closeModal}
 				modalIsOpen={modalIsOpen}
