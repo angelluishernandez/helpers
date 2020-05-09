@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import NavbarComponent from "./components/navbar-component/NavbarComponent";
 import { createBrowserHistory } from "history";
 import { Switch, Route, Router } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
