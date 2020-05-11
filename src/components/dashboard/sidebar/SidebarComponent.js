@@ -27,7 +27,11 @@ const SideBar = (props) => {
 				mobileOpen={mobileOpen}
 				setMobileOpen={setMobileOpen}
 			/>
-			<DrawerComponent />
+			<DrawerComponent
+				setMobileOpen={setMobileOpen}
+				mobileOpen={mobileOpen}
+				handleDrawerToggle={handleDrawerToggle}
+			/>
 		</div>
 	);
 };

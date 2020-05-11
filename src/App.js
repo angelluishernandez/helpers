@@ -7,6 +7,8 @@ import HomePage from "./components/home/HomePage";
 import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import { auth } from "firebase";
+import CreateHelperItem from "./components/helpers-components/create-helper/CreateHelperStep";
+import CreateHelperForm from "./components/helpers-components/create-helper/CreateHelperForm";
 
 export const history = createBrowserHistory();
 
@@ -42,6 +44,12 @@ const App = (props) => {
 					exact
 					path="/dashboard"
 					component={Dashboard}
+					authenticated={authenticated}
+				/>
+				<PrivateRoute
+					exact
+					path="/create-helper"
+					component={CreateHelperForm}
 					authenticated={authenticated}
 				/>
 			</div>

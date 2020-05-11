@@ -17,15 +17,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const DrawerComponent = (props) => {
+const DrawerComponent = ({
+	setMobileOpen,
+	mobileOpen,
+	handleDrawerToggle,
+	window,
+}) => {
 	const classes = useStyles();
 
-	const [mobileOpen, setMobileOpen] = useState(false);
-	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
-	};
-
-	const { window } = props;
 	const container =
 		window !== undefined ? () => window().document.body : undefined;
 

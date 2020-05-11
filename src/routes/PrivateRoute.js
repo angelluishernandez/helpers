@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import NavbarComponent from "../components/dashboard/navbar-component/NavbarComponent";
+import SidebarComponent from "../components/dashboard/sidebar/SidebarComponent";
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
 	return (
@@ -9,7 +10,7 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
 			render={(props) =>
 				authenticated === true ? (
 					<>
-						<NavbarComponent />
+						<SidebarComponent />
 						<Component {...props} />
 					</>
 				) : (

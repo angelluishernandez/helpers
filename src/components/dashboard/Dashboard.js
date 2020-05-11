@@ -10,11 +10,7 @@ const Dashboard = ({ firebaseAuth }) => {
 			.signOut()
 			.then(() => history.push("/"));
 	};
-	return (
-		<div>
-			<SideBar />
-		</div>
-	);
+	return <div></div>;
 };
 
 export default Dashboard;

@@ -28,7 +28,24 @@
 		<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
 		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
+		<script
+			src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+			referrerpolicy="origin"
+		></script>
+		<script>
+			tinymce.init({
+				menubar: "insert",
+				toolbar: "image",
+				selector: "textarea",
+				plugins: "codesample",
+				codesample_languages: [
+					{ text: "HTML/XML", value: "markup" },
+					{ text: "JavaScript", value: "javascript" },
+					{ text: "CSS", value: "css" },
+				],
+				toolbar: "codesample",
+			});
+		</script>
 		<title>Helpers</title>
 	</head>
 	<body>

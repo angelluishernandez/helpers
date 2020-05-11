@@ -43,7 +43,7 @@ const NavbarComponent = ({ handleDrawerToggle, mobileOpen, setMobileOpen }) => {
 	const classes = useStyles();
 
 	return (
-		<AppBar position="fixed" className={classes.appBar}>
+		<AppBar position="relative" className={classes.appBar}>
 			<Toolbar className={classes.toolBar}>
 				<div>
 					<IconButton

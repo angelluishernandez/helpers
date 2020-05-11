@@ -5,6 +5,7 @@ import {
 	ListItem,
 	ListItemText,
 	ListItemIcon,
+	Link,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AssignmentTurnedInSharpIcon from "@material-ui/icons/AssignmentTurnedInSharp";
@@ -28,7 +29,9 @@ const SideBarItemsList = () => {
 					<ListItemIcon>
 						<AssignmentTurnedInSharpIcon />
 					</ListItemIcon>
-					<ListItemText primary={"Add tasks"} className={classes.title} />
+					<a href="/create-helper">
+						<ListItemText primary={"Add tasks"} className={classes.title} />
+					</a>
 				</ListItem>
 				<List>
 					<ListItem>
