@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-const TextEditorComponent = ({ handleChange }) => {
+const TextEditorComponent = ({ handleEditorChange }) => {
 	const [editorContent, setEditorContent] = useState("");
 
-	const handleEditorChange = (content, editor) => {
-		handleChange(content);
+	const onEditorChange = (content, editor) => {
+		setEditorContent(content);
+		handleEditorChange(editorContent);
 	};
 
 	return (
@@ -29,8 +30,8 @@ const TextEditorComponent = ({ handleChange }) => {
 					"//www.tiny.cloud/css/codepen.min.css",
 				],
 			}}
-			onEditorChange={handleEditorChange}
-			name="editor"
+			textareaName="editor"
+			onEditorChange={onEditorChange}
 		/>
 	);
 };

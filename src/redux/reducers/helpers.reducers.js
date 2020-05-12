@@ -1,13 +1,13 @@
-// const helpersReducerDefaultState = [];
+const helpersReducerDefaultState = [];
 
-// const helpersReducer = (state = helpersReducerDefaultState, action) => {
-// 	switch (action.type) {
-// 		case "SET_HELPERS":
-// 			return action.helpers;
+const helpersReducer = (state = helpersReducerDefaultState, action) => {
+	switch (action.type) {
+		case "SET_HELPERS":
+			return action.helpers;
 
-// 		default:
-// 			return state;
-// 	}
-// };
+		default:
+			return state;
+	}
+};
 
-// export default helpersReducer;
+export default helpersReducer;

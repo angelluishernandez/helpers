@@ -9,10 +9,16 @@ const useForm = (callback) => {
 	};
 
 	const handleChange = (event) => {
-		console.log(values);
 		setValues((values) => ({
 			...values,
 			[event.target.name]: event.target.value,
+		}));
+	};
+
+	const handleEditorChange = (content) => {
+		setValues((values) => ({
+			...values,
+			editor: content,
 		}));
 	};
 
@@ -20,6 +26,7 @@ const useForm = (callback) => {
 		handleChange,
 		handleSubmit,
 		values,
+		handleEditorChange,
 	};
 };
 

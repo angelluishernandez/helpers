@@ -9,7 +9,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import { auth } from "firebase";
 import CreateHelperItem from "./components/helpers-components/create-helper/CreateHelperStep";
 import CreateHelperForm from "./components/helpers-components/create-helper/CreateHelperForm";
-
+import HelperPage from "./components/helpers-components/helper-page/HelperPage";
 export const history = createBrowserHistory();
 
 const App = (props) => {
@@ -50,6 +50,12 @@ const App = (props) => {
 					exact
 					path="/create-helper"
 					component={CreateHelperForm}
+					authenticated={authenticated}
+				/>
+				<PrivateRoute
+					exact
+					path="/helpers/:helperId"
+					component={HelperPage}
 					authenticated={authenticated}
 				/>
 			</div>
