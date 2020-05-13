@@ -12,14 +12,14 @@ const CreateHelperItem = ({
 			{currentStep <= 1 && (
 				<div>
 					<div className="form-group">
-						<label htmlFor="title">Title</label>
+						<label htmlFor="name">Name</label>
 						<input
 							type="text"
-							name="title"
+							name="name"
 							placeholder="Helper title"
 							className="form-control"
 							onChange={handleChange}
-							value={values.title}
+							value={values.name}
 						/>
 					</div>
 					<div className="form-group">

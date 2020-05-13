@@ -1,32 +1,17 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { database } from "../../firebase/firebase";
 
-export const fetchHelpers = (userId) => {
-	return (dispatch) => {
-		database
-			.ref(`users/${userId}/helpers`)
-			.once("value")
-			.then((snapshot) => {
-				console.log(snapshot);
-			});
-	};
-};
+//----------------------ACTION GENERATORS----------------------//
 
-export const setHelpers = (helpers) => ({
-	type: "SET_HELPERS",
-	helpers,
-});
+//----------------------Fetch Helpers----------------------//
 
-export const startSetHelpers = () => {
+export const fetchHelpers = () => {
 	return (dispatch, getState) => {
-		const uid = getState().auth.uid;
+		const userUid = getState().auth.user;
 
 		return database
-			.ref(`users/${uid}/helpers`)
+			.ref(`users/${userUid}/helpers`)
 			.once("value")
 			.then((snapshot) => {
-				console.log(snapshot);
 				const helpers = [];
 				snapshot.forEach((childSnapshot) => {
 					helpers.push({
@@ -38,3 +23,10 @@ export const startSetHelpers = () => {
 			});
 	};
 };
+
+//----------------------ACTION TYPES----------------------//
+
+export const setHelpers = (helpers) => ({
+	type: "SET_HELPERS",
+	helpers,
+});
