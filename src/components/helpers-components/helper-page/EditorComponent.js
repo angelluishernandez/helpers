@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-const EditorComponent = () => {
-	const [editorContent, setEditorContent] = useState("");
-
+const EditorComponent = ({
+	setEditorContent,
+	setStep,
+	step,
+	editorContent,
+}) => {
 	const handleEditorChange = (content, editor) => {
 		setEditorContent(content);
+		setStep({ ...step, description: editorContent });
 	};
 
 	return (
@@ -13,6 +17,7 @@ const EditorComponent = () => {
 			init={{
 				height: 300,
 				menubar: false,
+
 				plugins: [
 					"advlist autolink lists link image charmap print preview anchor",
 					"searchreplace visualblocks code fullscreen",
@@ -24,6 +29,7 @@ const EditorComponent = () => {
 				bullist numlist outdent indent | removeformat | help",
 			}}
 			onEditorChange={handleEditorChange}
+			textareaName="description"
 		/>
 	);
 };

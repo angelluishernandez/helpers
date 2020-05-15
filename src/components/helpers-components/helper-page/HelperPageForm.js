@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import EditorComponent from "./EditorComponent";
 
 const HelperPageForm = ({ handleSubmit, step, setStep }) => {
+	const [editorContent, setEditorContent] = useState("");
+
 	return (
 		<form action="" onSubmit={handleSubmit}>
 			<div className="form-group">
@@ -28,7 +30,12 @@ const HelperPageForm = ({ handleSubmit, step, setStep }) => {
 			<div className="form-group">
 				<label htmlFor="description">Description</label>
 
-				<EditorComponent />
+				<EditorComponent
+					setEditorContent={setEditorContent}
+					editorContent={editorContent}
+					step={step}
+					setStep={setStep}
+				/>
 			</div>
 			<button className="button">Create step</button>
 		</form>

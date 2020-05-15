@@ -13,7 +13,6 @@ const CreateHelperForm = ({ userUid }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("entra");
 		const helperId = uuid();
 		database
 			.ref(`users/${userUid}/helpers/${helperId}`)

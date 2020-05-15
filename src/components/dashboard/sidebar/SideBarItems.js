@@ -19,7 +19,6 @@ const SideBarItems = ({ helpers, fetchHelpers }) => {
 		fetchHelpers();
 	}, []);
 
-	console.log(helpers);
 	return (
 		<List>
 			{helpers.map((helper, index) => {

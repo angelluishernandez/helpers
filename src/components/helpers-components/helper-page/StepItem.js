@@ -19,6 +19,7 @@ import { useState } from "react";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import EditorContent from "./EditorContent";
 
 const ExpansionPanel = withStyles({
 	root: {
@@ -81,13 +82,7 @@ const StepItems = ({ steps }) => {
 						<Typography>{step.name}</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
-						<Typography>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-							eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-							eget.
-						</Typography>
+						<EditorContent content={step.description} />
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
 			))}

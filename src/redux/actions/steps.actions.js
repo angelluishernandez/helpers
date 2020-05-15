@@ -6,8 +6,6 @@ import { database } from "../../firebase/firebase";
 
 export const fetchSteps = (helperId) => {
 	return (dispatch, getState) => {
-		console.log(helperId);
-
 		const userUid = getState().auth.user;
 		return database
 			.ref(`users/${userUid}/helpers/${helperId}/steps`)

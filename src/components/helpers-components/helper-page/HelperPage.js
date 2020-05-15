@@ -13,15 +13,14 @@ const HelperPage = ({ match, addStep, fetchSteps, helpers, steps }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addStep(step, helperId);
+		console.log(step);
 	};
 
 	useEffect(() => {
-		console.log("Is rerendering?");
 		fetchSteps(helperId);
 	}, [helperId]);
 
 	const formProps = { handleSubmit, step, setStep };
-	console.log(helpers);
 	return (
 		<div className="container">
 			<div className="row">
