@@ -1,53 +1,51 @@
 import React from "react";
 import {
-	Divider,
 	List,
 	ListItem,
-	ListItemText,
+	ListItemAvatar,
 	ListItemIcon,
-	Link,
+	ListItemText,
+	Avatar,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import AssignmentTurnedInSharpIcon from "@material-ui/icons/AssignmentTurnedInSharp";
+import FolderIcon from "@material-ui/icons/Folder";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { connect } from "react-redux";
+import { fetchHelpers } from "../../../redux/actions/helpers.actions";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const SideBarItemsList = () => {
-	const useStyles = makeStyles((theme) => ({
-		toolbar: theme.mixins.toolbar,
-		title: {
-			fontWeight: "800",
-		},
-	}));
+const SideBarItems = ({ helpers, fetchHelpers }) => {
+	useEffect(() => {
+		fetchHelpers();
+	}, []);
 
-	const classes = useStyles();
-
+	console.log(helpers);
 	return (
-		<div className="SideBarItemsList">
-			<div className={classes.toolbar} />
-			<Divider />
-			<List>
-				<ListItem>
-					<ListItemIcon>
-						<AssignmentTurnedInSharpIcon />
-					</ListItemIcon>
-					<a href="/create-helper">
-						<ListItemText primary={"Add tasks"} className={classes.title} />
-					</a>
-				</ListItem>
-				<List>
-					<ListItem>
-						<ListItemText primary={"Some Task"} />
+		<List>
+			{helpers.map((helper, index) => {
+				return (
+					<ListItem key={index}>
+						<ListItemAvatar>
+							<Avatar>
+								<FolderIcon />
+							</Avatar>
+						</ListItemAvatar>
+						<Link to={`/helpers/${helper.id}`}>
+							<ListItemText primary={helper.title} />
+						</Link>
 					</ListItem>
-				</List>
-			</List>
-			<Divider />
-			<List>
-				<ListItem>
-					<ListItemText primary={"Hello"} />
-				</ListItem>
-			</List>
-			<Divider />
-		</div>
+				);
+			})}
+		</List>
 	);
 };
 
-export default SideBarItemsList;
+const mapStateToProps = (state) => ({
+	helpers: state.helpers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	fetchHelpers: () => dispatch(fetchHelpers()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBarItems);

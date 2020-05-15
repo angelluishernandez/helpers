@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { firebase } from "../../firebase/firebase";
 import { history } from "../../App";
-import SideBar from "./sidebar/SidebarComponent";
+// import SidebarComponent from "./sidebar/SidebarComponent";
 import { connect } from "react-redux";
 import { fetchHelpers } from "../../redux/actions/helpers.actions";
 

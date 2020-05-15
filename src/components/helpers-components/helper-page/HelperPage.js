@@ -5,35 +5,27 @@ import { fetchSteps, addStep } from "../../../redux/actions/steps.actions";
 import StepItems from "./StepItem";
 import HelperPageForm from "./HelperPageForm";
 
-const HelperPage = (props) => {
+const HelperPage = ({ match, addStep, fetchSteps, helpers, steps }) => {
 	const [step, setStep] = useState({});
 
-	const helperId = props.match.params.helperId;
+	const helperId = match.params.helperId;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		props.addStep(step, helperId);
+		addStep(step, helperId);
 	};
 
 	useEffect(() => {
-		props.fetchSteps(helperId);
-	}, []);
+		console.log("Is rerendering?");
+		fetchSteps(helperId);
+	}, [helperId]);
 
 	const formProps = { handleSubmit, step, setStep };
-
+	console.log(helpers);
 	return (
 		<div>
 			<HelperPageForm {...formProps} />
-
-			{/* This should be another component */}
-
-			{/* Add helper to global store and then pass it to the parent component */}
-
-			{props.steps.length !== 0 ? (
-				<StepItems steps={props.steps} />
-			) : (
-				<h1>Loading</h1>
-			)}
+			{steps.length !== 0 ? <StepItems steps={steps} /> : <h1>Loading</h1>}
 		</div>
 	);
 };
@@ -41,6 +33,7 @@ const HelperPage = (props) => {
 const mapStateToProps = (state) => ({
 	userUid: state.auth.user,
 	steps: state.steps,
+	helpers: state.helpers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

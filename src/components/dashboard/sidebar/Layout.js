@@ -3,8 +3,8 @@ import React, { useState } from "react";
 //Material UI Components
 
 import { makeStyles } from "@material-ui/core/styles";
-import NavbarComponent from "../navbar-component/NavbarComponent";
-import DrawerComponent from "./DrawerComponent";
+import NavbarComponent from "./NavbarComponent";
+import SidebarComponent from "./SideBarComponent";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-const SideBar = (props) => {
+const Layout = (props) => {
 	const classes = useStyles();
 
 	const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,7 +27,7 @@ const SideBar = (props) => {
 				mobileOpen={mobileOpen}
 				setMobileOpen={setMobileOpen}
 			/>
-			<DrawerComponent
+			<SidebarComponent
 				setMobileOpen={setMobileOpen}
 				mobileOpen={mobileOpen}
 				handleDrawerToggle={handleDrawerToggle}
@@ -36,4 +36,4 @@ const SideBar = (props) => {
 	);
 };
 
-export default SideBar;
+export default Layout;

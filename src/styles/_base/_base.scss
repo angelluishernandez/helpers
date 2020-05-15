@@ -3,5 +3,9 @@ body{
 }
 
 hr{
-  color: #3a3a38; 
+  color: $title-color 
+}
+
+a{
+  color: $title-color
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Hidden, Drawer } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import SideBarItemsList from "./SideBarItems";
+import SideBarContent from "./SideBarContent";
 
 const drawerWidth = 240;
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const DrawerComponent = ({
+const SideBarComponent = ({
 	setMobileOpen,
 	mobileOpen,
 	handleDrawerToggle,
@@ -45,7 +45,7 @@ const DrawerComponent = ({
 						keepMounted: true,
 					}}
 				>
-					<SideBarItemsList />
+					<SideBarContent />
 				</Drawer>
 			</Hidden>
 			<Hidden xsDown implementation="css">
@@ -56,11 +56,11 @@ const DrawerComponent = ({
 					variant="permanent"
 					open
 				>
-					<SideBarItemsList />
+					<SideBarContent />
 				</Drawer>
 			</Hidden>
 		</nav>
 	);
 };
 
-export default DrawerComponent;
+export default SideBarComponent;
