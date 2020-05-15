@@ -23,9 +23,13 @@ const HelperPage = ({ match, addStep, fetchSteps, helpers, steps }) => {
 	const formProps = { handleSubmit, step, setStep };
 	console.log(helpers);
 	return (
-		<div>
-			<HelperPageForm {...formProps} />
-			{steps.length !== 0 ? <StepItems steps={steps} /> : <h1>Loading</h1>}
+		<div className="container">
+			<div className="row">
+				<div className="col-md-12">
+					<HelperPageForm {...formProps} />
+					{steps.length !== 0 ? <StepItems steps={steps} /> : <h1>Loading</h1>}
+				</div>
+			</div>
 		</div>
 	);
 };

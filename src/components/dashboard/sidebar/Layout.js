@@ -15,22 +15,28 @@ const useStyles = makeStyles(() => ({
 const Layout = (props) => {
 	const classes = useStyles();
 
-	const [mobileOpen, setMobileOpen] = useState(false);
-	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
+	const [open, setOpen] = useState(false);
+
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpen(false);
 	};
 
 	return (
 		<div className={classes.root}>
 			<NavbarComponent
-				handleDrawerToggle={handleDrawerToggle}
-				mobileOpen={mobileOpen}
-				setMobileOpen={setMobileOpen}
+				handleDrawerOpen={handleDrawerOpen}
+				open={open}
+				setOpen={setOpen}
+				handleDrawerClose={handleDrawerClose}
 			/>
 			<SidebarComponent
-				setMobileOpen={setMobileOpen}
-				mobileOpen={mobileOpen}
-				handleDrawerToggle={handleDrawerToggle}
+				open={open}
+				handleDrawerOpen={handleDrawerOpen}
+				handleDrawerClose={handleDrawerClose}
 			/>
 		</div>
 	);

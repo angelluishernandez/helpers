@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Hidden, Drawer } from "@material-ui/core";
+import { Hidden, Drawer, Divider } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import SideBarContent from "./SideBarContent";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import IconButton from "@material-ui/core/IconButton";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
 	drawer: {
-		[theme.breakpoints.up("sm")]: {
+		drawer: {
 			width: drawerWidth,
 			flexShrink: 0,
 		},
@@ -15,50 +18,53 @@ const useStyles = makeStyles((theme) => ({
 	drawerPaper: {
 		width: drawerWidth,
 	},
+	drawerHeader: {
+		display: "flex",
+		alignItems: "center",
+		padding: theme.spacing(0, 1),
+		// necessary for content to be below app bar
+		...theme.mixins.toolbar,
+		justifyContent: "flex-end",
+		background: "#f37d7d",
+		height: "30vh",
+	},
 }));
 
 const SideBarComponent = ({
-	setMobileOpen,
-	mobileOpen,
-	handleDrawerToggle,
+	open,
+	setOpen,
+	handleDrawerOpen,
+	handleDrawerClose,
 	window,
 }) => {
 	const classes = useStyles();
-
+	console.log(open);
 	const container =
 		window !== undefined ? () => window().document.body : undefined;
 
 	const theme = useTheme();
 	return (
 		<nav className={classes.drawer} aria-label="mailbox folders">
-			<Hidden smUp implementation="css">
-				<Drawer
-					container={container}
-					variant="temporary"
-					anchor={theme.direction === "rtl" ? "right" : "left"}
-					open={mobileOpen}
-					onClose={handleDrawerToggle}
-					classes={{
-						paper: classes.drawerPaper,
-					}}
-					ModalProps={{
-						keepMounted: true,
-					}}
-				>
-					<SideBarContent />
-				</Drawer>
-			</Hidden>
-			<Hidden xsDown implementation="css">
-				<Drawer
-					classes={{
-						paper: classes.drawerPaper,
-					}}
-					variant="permanent"
-					open
-				>
-					<SideBarContent />
-				</Drawer>
-			</Hidden>
+			<Drawer
+				className={classes.drawer}
+				variant="persistent"
+				anchor={"left"}
+				open={open}
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+			>
+				<div className={classes.drawerHeader}>
+					<IconButton onClick={handleDrawerClose}>
+						{theme.direction === "ltr" ? (
+							<ChevronLeftIcon />
+						) : (
+							<ChevronRightIcon />
+						)}
+					</IconButton>
+				</div>
+				<SideBarContent />
+			</Drawer>
 		</nav>
 	);
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { firebase } from "../../../firebase/firebase";
+import clsx from "clsx";
 import ExitToAppSharpIcon from "@material-ui/icons/ExitToAppSharp";
 import {
 	Typography,
@@ -10,7 +11,13 @@ import {
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 
-const NavbarComponent = ({ handleDrawerToggle, mobileOpen, setMobileOpen }) => {
+const NavbarComponent = ({
+	handleDrawerOpen,
+
+	mobileOpen,
+	setMobileOpen,
+	open,
+}) => {
 	const doSignOut = () => firebase.auth().signOut();
 
 	const drawerWidth = 240;
@@ -20,11 +27,11 @@ const NavbarComponent = ({ handleDrawerToggle, mobileOpen, setMobileOpen }) => {
 			flexGrow: 1,
 		},
 		appBar: {
-			[theme.breakpoints.up("sm")]: {
-				width: `calc(100% - ${drawerWidth}px)`,
-				marginLeft: drawerWidth,
-			},
-			backgroundColor: "#f37d7d",
+			transition: theme.transitions.create(["margin", "width"], {
+				easing: theme.transitions.easing.sharp,
+				duration: theme.transitions.duration.leavingScreen,
+			}),
+			backgroundColor: "#ee5a5a",
 		},
 		toolBar: {
 			display: "flex",
@@ -32,10 +39,7 @@ const NavbarComponent = ({ handleDrawerToggle, mobileOpen, setMobileOpen }) => {
 		},
 
 		menuButton: {
-			marginRight: theme.spacing(2),
-			[theme.breakpoints.up("sm")]: {
-				display: "none",
-			},
+			// marginRight: theme.spacing(2),
 		},
 		search: {},
 	}));
@@ -43,21 +47,26 @@ const NavbarComponent = ({ handleDrawerToggle, mobileOpen, setMobileOpen }) => {
 	const classes = useStyles();
 
 	return (
-		<AppBar position="relative" className={classes.appBar}>
+		<AppBar
+			position="relative"
+			className={clsx(classes.appBar, {
+				[classes.appBarShift]: open,
+			})}
+		>
 			<Toolbar className={classes.toolBar}>
 				<div>
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
 						edge="start"
-						onClick={handleDrawerToggle}
-						className={classes.menuButton}
+						onClick={handleDrawerOpen}
+						className={clsx(classes.menuButton, open && classes.hide)}
 					>
 						<Menu />
 					</IconButton>
 				</div>
 				<div>
-					<Typography variant="h6" noWrap>
+					<Typography variant="h6" noWrap className="mr-2">
 						Helpers
 					</Typography>
 				</div>
