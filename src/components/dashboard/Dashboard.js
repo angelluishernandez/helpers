@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { firebase } from "../../firebase/firebase";
-import { history } from "../../App";
 // import SidebarComponent from "./sidebar/SidebarComponent";
 import { connect } from "react-redux";
 import { fetchHelpers } from "../../redux/actions/helpers.actions";
@@ -9,13 +7,6 @@ const Dashboard = ({ fetchHelpers, userUid }) => {
 	useEffect(() => {
 		fetchHelpers();
 	});
-
-	const doSignOut = () => {
-		firebase
-			.auth()
-			.signOut()
-			.then(() => history.push("/"));
-	};
 
 	//Use the dashboard to show the latest helpers
 

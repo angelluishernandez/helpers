@@ -1,20 +1,5 @@
-import React, { useEffect } from "react";
-import {
-	Card,
-	CardHeader,
-	CardMedia,
-	CardContent,
-	CardActions,
-	Collapse,
-	Avatar,
-	IconButton,
-	Typography,
-	makeStyles,
-	withStyles,
-} from "@material-ui/core";
-import ClassIcon from "@material-ui/icons/Class";
-import { Favorite, Share, ExpandMore, MoreVert } from "@material-ui/icons";
-import ExpandLess from "@material-ui/icons/ExpandLess";
+import React from "react";
+import { Typography, withStyles } from "@material-ui/core";
 import { useState } from "react";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";

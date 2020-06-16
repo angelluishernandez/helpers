@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { database } from "../../../firebase/firebase";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { fetchSteps, addStep } from "../../../redux/actions/steps.actions";
 import StepItems from "./StepItem";
@@ -13,12 +12,11 @@ const HelperPage = ({ match, addStep, fetchSteps, helpers, steps }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addStep(step, helperId);
-		console.log(step);
 	};
 
-	useEffect(() => {
-		fetchSteps(helperId);
-	}, [helperId]);
+	// useEffect(() => {
+	// 	fetchSteps(helperId);
+	// }, [helperId]);
 
 	const formProps = { handleSubmit, step, setStep };
 	return (

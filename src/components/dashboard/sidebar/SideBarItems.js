@@ -3,18 +3,18 @@ import {
 	List,
 	ListItem,
 	ListItemAvatar,
-	ListItemIcon,
 	ListItemText,
 	Avatar,
 } from "@material-ui/core";
 import FolderIcon from "@material-ui/icons/Folder";
-import DeleteIcon from "@material-ui/icons/Delete";
+
 import { connect } from "react-redux";
 import { fetchHelpers } from "../../../redux/actions/helpers.actions";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const SideBarItems = ({ helpers, fetchHelpers }) => {
+	//
 	useEffect(() => {
 		fetchHelpers();
 	}, []);

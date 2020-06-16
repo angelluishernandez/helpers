@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { firebase } from "../../../firebase/firebase";
 import clsx from "clsx";
 import ExitToAppSharpIcon from "@material-ui/icons/ExitToAppSharp";
@@ -19,8 +19,6 @@ const NavbarComponent = ({
 	open,
 }) => {
 	const doSignOut = () => firebase.auth().signOut();
-
-	const drawerWidth = 240;
 
 	const useStyles = makeStyles((theme) => ({
 		grow: {

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { createBrowserHistory } from "history";
-import { Switch, Route, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import HomePage from "./components/home/HomePage";
 import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import { auth } from "firebase";
-import CreateHelperItem from "./components/helpers-components/create-helper/CreateHelperStep";
 import CreateHelperForm from "./components/helpers-components/create-helper/CreateHelperForm";
 import HelperPage from "./components/helpers-components/helper-page/HelperPage";
 export const history = createBrowserHistory();

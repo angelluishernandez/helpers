@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 const EditorComponent = ({
@@ -24,9 +24,8 @@ const EditorComponent = ({
 					"insertdatetime media table paste code help wordcount",
 				],
 				toolbar:
-					"undo redo | formatselect | bold italic backcolor | \
-				alignleft aligncenter alignright alignjustify | \
-				bullist numlist outdent indent | removeformat | help",
+					"undo redo | formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformat | help",
+				valid_children: "+body[style]",
 			}}
 			onEditorChange={handleEditorChange}
 			textareaName="description"

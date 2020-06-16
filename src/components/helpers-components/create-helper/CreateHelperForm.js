@@ -1,27 +1,73 @@
 import React, { useState, useEffect } from "react";
-import CreateHelperItem from "./CreateHelperStep";
-import useForm from "../../../hooks/useForm";
+import FileUploadComponent from "./FileUploadComponent";
 import { connect } from "react-redux";
-import { firebase, database } from "../../../firebase/firebase";
+import { database, storage } from "../../../firebase/firebase";
 import { fetchHelpers } from "../../../redux/actions/helpers.actions";
 import { v4 as uuid } from "uuid";
 import { history } from "../../../App";
+import TextInputs from "./TextInputs";
+import request from "superagent";
+
+//Cloudinary credentials
+
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
 
 const CreateHelperForm = ({ userUid }) => {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 
+	// Image upload
+
+	const [image, setImage] = useState({});
+	const [imageURL, setImageURL] = useState("");
+	const [uploadingImg, setUploadingImg] = useState(false);
+
+	// Image / File handler
+
+	const handleFileUpload = (e) => {
+		if (e.target.files[0]) {
+			setImage(e.target.files[0]);
+		}
+	};
+
+	const uploadImg = (image) => {
+		const uploadTask = storage.ref(`ìmages/${image.name}`).put(image);
+
+		uploadTask.on(
+			"state_changed",
+			(snapshot) => {},
+			(err) => console.log(err),
+			() => {
+				setUploadingImg(true);
+
+				storage
+					.ref("images")
+					.child(image.name)
+					.getDownloadURL()
+					.then((url) => {
+						setImageURL(url);
+						setUploadingImg(false);
+					});
+			}
+		);
+	};
+
+	// Handle submit
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		const helperId = uuid();
 		database
 			.ref(`users/${userUid}/helpers/${helperId}`)
 			.set({
 				title,
 				description,
+				image: imageURL,
 				id: helperId,
 			})
-			.then((helper) => history.push(`/helpers/${helperId}`));
+			.then(() => history.push(`/helpers/${helperId}`));
 	};
 
 	return (
@@ -31,27 +77,25 @@ const CreateHelperForm = ({ userUid }) => {
 			<div className="row">
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit} className="CreateHelperItem__form">
-						<div className="form-group">
-							<label htmlFor="">Title</label>
-							<input
-								type="text"
-								className="form-control"
-								value={title}
-								placeholder="title"
-								onChange={(e) => setTitle(e.target.value)}
+						<TextInputs
+							setDescription={setDescription}
+							setTitle={setTitle}
+							title={title}
+							description={description}
+						/>
+
+						<div>
+							<FileUploadComponent
+								handleFileUpload={handleFileUpload}
+								uploadImg={uploadingImg}
 							/>
 						</div>
-						<div className="form-group">
-							<label htmlFor="">Description</label>
-							<input
-								type="text"
-								className="form-control"
-								value={description}
-								placeholder="title"
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-						</div>
-						<button className="button" type="submit">
+
+						<button
+							className="button"
+							type="submit"
+							disabled={uploadingImg ? true : false}
+						>
 							Create helper
 						</button>
 					</form>

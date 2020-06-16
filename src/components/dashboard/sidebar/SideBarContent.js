@@ -11,8 +11,10 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import AssignmentTurnedInSharpIcon from "@material-ui/icons/AssignmentTurnedInSharp";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import SideBarItems from "./SideBarItems";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SideBarContent = () => {
 	const useStyles = makeStyles((theme) => ({
@@ -35,6 +37,20 @@ const SideBarContent = () => {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
+				{/* Create a new helper */}
+				<ListItem button>
+					<ListItemIcon>
+						<AddBoxIcon />
+					</ListItemIcon>
+					<Link to="/create-helper">
+						<ListItemText
+							primary={"Create a new helper"}
+							className={classes.title}
+						/>
+					</Link>
+				</ListItem>
+
+				{/* Helper lists */}
 				<ListItem button onClick={handleClick}>
 					<ListItemIcon>
 						<AssignmentTurnedInSharpIcon />
