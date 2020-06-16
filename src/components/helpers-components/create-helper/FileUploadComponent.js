@@ -1,5 +1,4 @@
 import React from "react";
-import Dropzone from "react-dropzone";
 
 const FileUploadComponent = ({ handleFileUpload, uploadingImg }) => {
 	return (
