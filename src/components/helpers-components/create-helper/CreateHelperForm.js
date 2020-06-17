@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FileUploadComponent from "./FileUploadComponent";
 import { connect } from "react-redux";
 import { database, storage } from "../../../firebase/firebase";
@@ -6,12 +6,6 @@ import { fetchHelpers } from "../../../redux/actions/helpers.actions";
 import { v4 as uuid } from "uuid";
 import { history } from "../../../App";
 import TextInputs from "./TextInputs";
-import request from "superagent";
-
-//Cloudinary credentials
-
-const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
-const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
 
 const CreateHelperForm = ({ userUid }) => {
 	const [title, setTitle] = useState("");
@@ -25,14 +19,14 @@ const CreateHelperForm = ({ userUid }) => {
 
 	// Image / File handler
 
-	const handleFileUpload = (e) => {
-		if (e.target.files[0]) {
-			setImage(e.target.files[0]);
+	const handleFileUpload = (file) => {
+		if (file) {
+			setImage(file);
 		}
 	};
 
 	const uploadImg = (image) => {
-		const uploadTask = storage.ref(`ìmages/${image.name}`).put(image);
+		const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
 		uploadTask.on(
 			"state_changed",
@@ -87,7 +81,8 @@ const CreateHelperForm = ({ userUid }) => {
 						<div>
 							<FileUploadComponent
 								handleFileUpload={handleFileUpload}
-								uploadImg={uploadingImg}
+								uploadImg={uploadImg}
+								image={image}
 							/>
 						</div>
 

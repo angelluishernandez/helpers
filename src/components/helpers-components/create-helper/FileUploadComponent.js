@@ -1,11 +1,22 @@
 import React from "react";
+import { useDropzone } from "react-dropzone";
 
-const FileUploadComponent = ({ handleFileUpload, uploadingImg }) => {
+const FileUploadComponent = ({ handleFileUpload, uploadImg, image }) => {
+	const { getRootProps, getInputProps } = useDropzone({
+		onDrop: (files) => handleFileUpload(files[0]),
+	});
+
 	return (
-		<div className="form-group">
-			<input type="file" onChange={handleFileUpload} />
-			<button onClick={uploadingImg}>Upload this image</button>
-		</div>
+		<section className="container mb-5">
+			<div {...getRootProps({ className: "dropzone mb-3" })}>
+				<input {...getInputProps()} />
+				<p>Drag 'n' drop some files here, or click to select files</p>
+			</div>
+
+			<button type="button" onClick={() => uploadImg(image)} className="button">
+				Upload this image
+			</button>
+		</section>
 	);
 };
 
