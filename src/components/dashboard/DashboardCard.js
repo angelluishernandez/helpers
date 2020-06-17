@@ -13,6 +13,7 @@ import {
 	Button,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { history } from "../../App";
 
 // Material UI styles hook
 
@@ -20,10 +21,22 @@ const useStyles = makeStyles({
 	root: {
 		width: 340,
 	},
+	body: {
+		height: "80%",
+	},
 	media: {
 		height: 140,
 	},
 });
+
+// I just want to show the clicking effect before taking to the url
+// It is quite nice effect
+
+const goToHelperDetails = (id) => {
+	setInterval(() => {
+		history.push(`/helpers/${id}`);
+	}, 1000);
+};
 
 const DashboardCard = ({ helper }) => {
 	const { description, id, image, title } = helper;
@@ -31,7 +44,10 @@ const DashboardCard = ({ helper }) => {
 	const classes = useStyles();
 	return (
 		<Card className={`m-2 ${classes.root}`}>
-			<CardActionArea>
+			<CardActionArea
+				className={classes.body}
+				onClick={() => goToHelperDetails(id)}
+			>
 				<CardMedia className={classes.media} image={image} title={title} />
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="h2">
