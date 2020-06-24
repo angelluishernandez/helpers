@@ -13,8 +13,6 @@ const Dashboard = ({ fetchHelpers, userUid, helpers }) => {
 		<DashboardCard helper={helper} key={index} />
 	));
 
-	console.log(helpers);
-
 	//Use the dashboard to show the latest helpers
 	return (
 		<div className="container mt-5">

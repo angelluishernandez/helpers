@@ -24,9 +24,30 @@ export const fetchHelpers = () => {
 	};
 };
 
+export const getCurrentHelper = (helperId) => {
+	return (dispatch, getState) => {
+		const userUid = getState().auth.user;
+
+		return database
+			.ref(`users/${userUid}/helpers/${helperId}`)
+			.once("value")
+			.then((snapshot) => {
+				const currentHelper = snapshot.val();
+				console.log("EEEEEEEEEEEEEE");
+				console.log(currentHelper);
+				dispatch(setCurrentHelper(currentHelper));
+			});
+	};
+};
+
 //----------------------ACTION TYPES----------------------//
 
 export const setHelpers = (helpers) => ({
 	type: "SET_HELPERS",
 	helpers,
+});
+
+export const setCurrentHelper = (currentHelper) => ({
+	type: "SET_CURRENT_HELPER",
+	currentHelper,
 });

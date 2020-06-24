@@ -32,11 +32,11 @@ const useStyles = makeStyles({
 // I just want to show the clicking effect before taking to the url
 // It is quite nice effect
 
-const goToHelperDetails = (id) => {
-	setInterval(() => {
-		history.push(`/helpers/${id}`);
-	}, 1000);
-};
+// const goToHelperDetails = (id) => {
+// 	setInterval(() => {
+// 		history.push(`/helpers/${id}`);
+// 	}, 1000);
+// };
 
 const DashboardCard = ({ helper }) => {
 	const { description, id, image, title } = helper;
@@ -46,7 +46,7 @@ const DashboardCard = ({ helper }) => {
 		<Card className={`m-2 ${classes.root}`}>
 			<CardActionArea
 				className={classes.body}
-				onClick={() => goToHelperDetails(id)}
+				// onClick={() => goToHelperDetails(id)}
 			>
 				<CardMedia className={classes.media} image={image} title={title} />
 				<CardContent>

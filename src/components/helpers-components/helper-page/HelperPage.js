@@ -1,56 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { fetchSteps, addStep } from "../../../redux/actions/steps.actions";
-import { fetchHelpers } from "../../../redux/actions/helpers.actions";
+import { getCurrentHelper } from "../../../redux/actions/helpers.actions";
 import HelperPageForm from "./HelperPageForm";
+import Spinner from "../../UI/Spinner";
 
-const HelperPage = ({
-	match,
-	addStep,
-	fetchSteps,
-	helpers,
-	steps,
-	fetchHelpers,
-	helper,
-}) => {
-	const [loading, setLoading] = useState(false);
-	const [currentHelper, setCurrentHelper] = useState({});
+const HelperPage = ({ getCurrentHelper, match, currentHelper, steps }) => {
+	const helperId = match.params.helperId;
+
+	const [loading, setLoading] = useState(true);
 
 	const [step, setStep] = useState({});
 
-	const helperId = match.params.helperId;
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		addStep(step, helperId);
-		setLoading(false);
 	};
 
-	// Get helpers so they can be filtered
+	// Fetch current helpers info
 
 	useEffect(() => {
-		setLoading(true);
-		fetchHelpers();
-	}, []);
+		const getData = async () => {
+			await getCurrentHelper(helperId);
+			await fetchSteps(helperId);
+		};
+		getData().then(() => setLoading(false));
+	}, [helperId]);
 
-	// Update component with the current helper
-
-	useEffect(() => {
-		setCurrentHelper(helper[0]);
-
-		if (currentHelper === undefined) {
-			fetchSteps(helperId);
-			setLoading(false);
-		}
-	}, [helper]);
+	console.log(helperId);
 
 	const formProps = {
 		handleSubmit,
 		step,
 		setStep,
-		loading,
 		currentHelper,
+		loading,
 		steps,
 	};
 
@@ -58,22 +42,17 @@ const HelperPage = ({
 };
 
 const mapStateToProps = (state, props) => {
-	const currentHelper = state.helpers.filter(
-		(helper) => helper.id === props.match.params.helperId
-	);
-
+	console.log(state);
 	return {
-		userUid: state.auth.user,
 		steps: state.steps,
-		helpers: state.helpers,
-		helper: currentHelper,
+		currentHelper: state.currentHelper,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
+	getCurrentHelper: (helperId) => dispatch(getCurrentHelper(helperId)),
 	fetchSteps: (helperId) => dispatch(fetchSteps(helperId)),
 	addStep: (step, helperId) => dispatch(addStep(step, helperId)),
-	fetchHelpers: () => dispatch(fetchHelpers()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HelperPage);

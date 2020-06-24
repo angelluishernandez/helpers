@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const SideBarItems = ({ helpers, fetchHelpers }) => {
+	console.log(helpers);
 	//
 	useEffect(() => {
 		fetchHelpers();
