@@ -38,6 +38,17 @@ export const addStep = (step, helperId) => {
 	};
 };
 
+export const removeStep = (stepId, helperId) => {
+	return (dispatch, getState) => {
+		const userUid = getState().auth.user;
+
+		database
+			.ref(`users/${userUid}/helpers/${helperId}/${stepId}`)
+			.remove()
+			.then(() => dispatch(deleteStep(stepId)));
+	};
+};
+
 //----------------------ACTION TYPES----------------------//
 
 export const setSteps = (steps) => ({
@@ -48,4 +59,9 @@ export const setSteps = (steps) => ({
 export const addStepToStore = (step) => ({
 	type: "ADD_STEP",
 	step,
+});
+
+export const deleteStep = (stepId) => ({
+	type: "DELETE_STEP",
+	stepId,
 });

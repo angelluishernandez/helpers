@@ -30,7 +30,6 @@ const HelperPage = ({
 	// Get helpers so they can be filtered
 
 	useEffect(() => {
-		console.log(loading, "Entra 1");
 		setLoading(true);
 		fetchHelpers();
 	}, []);
@@ -38,17 +37,13 @@ const HelperPage = ({
 	// Update component with the current helper
 
 	useEffect(() => {
-		console.log(loading, "Entra 2");
 		setCurrentHelper(helper[0]);
-		// fetchSteps(helperId);
 
 		if (currentHelper === undefined) {
 			fetchSteps(helperId);
 			setLoading(false);
 		}
 	}, [helper]);
-
-	console.log(loading);
 
 	const formProps = {
 		handleSubmit,
