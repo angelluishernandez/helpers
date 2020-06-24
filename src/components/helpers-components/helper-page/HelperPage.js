@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSteps, addStep } from "../../../redux/actions/steps.actions";
 import { fetchHelpers } from "../../../redux/actions/helpers.actions";
-import StepItems from "./StepItem";
 import HelperPageForm from "./HelperPageForm";
-import Spinner from "../../UI/Spinner";
 
 const HelperPage = ({
 	match,
@@ -15,8 +13,7 @@ const HelperPage = ({
 	fetchHelpers,
 	helper,
 }) => {
-	console.log(helper[0]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [currentHelper, setCurrentHelper] = useState({});
 
 	const [step, setStep] = useState({});
@@ -25,44 +22,44 @@ const HelperPage = ({
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		addStep(step, helperId);
+		setLoading(false);
 	};
 
 	// Get helpers so they can be filtered
 
 	useEffect(() => {
+		console.log(loading, "Entra 1");
+		setLoading(true);
 		fetchHelpers();
 	}, []);
 
 	// Update component with the current helper
 
 	useEffect(() => {
+		console.log(loading, "Entra 2");
 		setCurrentHelper(helper[0]);
-		setLoading(true);
+		// fetchSteps(helperId);
+
 		if (currentHelper === undefined) {
+			fetchSteps(helperId);
 			setLoading(false);
 		}
 	}, [helper]);
 
-	console.log(currentHelper, loading);
-	const formProps = { handleSubmit, step, setStep };
+	console.log(loading);
 
-	return (
-		<div className="container">
-			{!loading ? (
-				<div className="row">
-					<div className="col-10 mx-auto">
-						<h4>{currentHelper.title}</h4>
+	const formProps = {
+		handleSubmit,
+		step,
+		setStep,
+		loading,
+		currentHelper,
+		steps,
+	};
 
-						<HelperPageForm {...formProps} />
-						{steps.length !== 0 ? <StepItems steps={steps} /> : <Spinner />}
-					</div>
-				</div>
-			) : (
-				<Spinner />
-			)}
-		</div>
-	);
+	return <HelperPageForm {...formProps} />;
 };
 
 const mapStateToProps = (state, props) => {
