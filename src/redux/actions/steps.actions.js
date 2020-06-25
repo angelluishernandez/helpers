@@ -5,6 +5,8 @@ import { database } from "../../firebase/firebase";
 //----------------------Fetch Steps----------------------//
 
 export const fetchSteps = (helperId) => {
+	console.log("entra");
+
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
 		return database
@@ -38,14 +40,14 @@ export const addStep = (step, helperId) => {
 	};
 };
 
-export const removeStep = (stepId, helperId) => {
+export const removeStep = ({ stepId } = {}, helperId) => {
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
 
 		database
 			.ref(`users/${userUid}/helpers/${helperId}/${stepId}`)
 			.remove()
-			.then(() => dispatch(deleteStep(stepId)));
+			.then(() => dispatch(deleteStep({ stepId })));
 	};
 };
 
@@ -61,7 +63,7 @@ export const addStepToStore = (step) => ({
 	step,
 });
 
-export const deleteStep = (stepId) => ({
+export const deleteStep = ({ stepId }) => ({
 	type: "DELETE_STEP",
 	stepId,
 });

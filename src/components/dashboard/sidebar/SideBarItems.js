@@ -18,6 +18,7 @@ const SideBarItems = ({ helpers, fetchHelpers }) => {
 	//
 	useEffect(() => {
 		fetchHelpers();
+		// eslint-disable-next-line
 	}, []);
 
 	return (

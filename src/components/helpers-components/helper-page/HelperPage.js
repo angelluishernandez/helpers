@@ -1,11 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSteps, addStep } from "../../../redux/actions/steps.actions";
-import { getCurrentHelper } from "../../../redux/actions/helpers.actions";
+import {
+	getCurrentHelper,
+	fetchHelpers,
+} from "../../../redux/actions/helpers.actions";
 import HelperPageForm from "./HelperPageForm";
-import Spinner from "../../UI/Spinner";
 
-const HelperPage = ({ getCurrentHelper, match, currentHelper, steps }) => {
+const HelperPage = ({
+	getCurrentHelper,
+	match,
+	currentHelper,
+	steps,
+	fetchSteps,
+	addStep,
+}) => {
 	const helperId = match.params.helperId;
 
 	const [loading, setLoading] = useState(true);
@@ -15,19 +24,21 @@ const HelperPage = ({ getCurrentHelper, match, currentHelper, steps }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addStep(step, helperId);
+		fetchSteps(helperId);
 	};
 
 	// Fetch current helpers info
 
-	useEffect(() => {
-		const getData = async () => {
-			await getCurrentHelper(helperId);
-			await fetchSteps(helperId);
-		};
-		getData().then(() => setLoading(false));
-	}, [helperId]);
+	const getData = async () => {
+		await getCurrentHelper(helperId);
+		await fetchHelpers(helperId);
+	};
 
-	console.log(helperId);
+	// Use effect on first load
+
+	if (loading) {
+		getData().then(() => setLoading(false));
+	}
 
 	const formProps = {
 		handleSubmit,

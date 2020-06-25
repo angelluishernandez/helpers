@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import SidebarComponent from "./sidebar/SidebarComponent";
 import { connect } from "react-redux";
 import { fetchHelpers } from "../../redux/actions/helpers.actions";
 import DashboardCard from "./DashboardCard";
@@ -7,6 +6,7 @@ import DashboardCard from "./DashboardCard";
 const Dashboard = ({ fetchHelpers, userUid, helpers }) => {
 	useEffect(() => {
 		fetchHelpers();
+		// eslint-disable-next-line
 	}, []);
 
 	const helpersJSX = helpers.map((helper, index) => (

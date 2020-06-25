@@ -1,65 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { createBrowserHistory } from "history";
-import { Router } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import HomePage from "./components/home/HomePage";
 import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import { auth } from "firebase";
 import CreateHelperForm from "./components/helpers-components/create-helper/CreateHelperForm";
+import Layout from "./components/dashboard/sidebar/Layout";
 import HelperPage from "./components/helpers-components/helper-page/HelperPage";
+import ProfilePage from "./components/Profile/ProfilePage";
+import AuthRoute from "./components/AuthRoute.js/AuthRoute";
+
 export const history = createBrowserHistory();
 
-const App = (props) => {
-	const [authenticated, setAuthenticated] = useState(false);
-
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		auth().onAuthStateChanged((user) => {
-			if (user) {
-				setAuthenticated(true);
-				setLoading(false);
-			} else {
-				setAuthenticated(false);
-				setLoading(false);
-			}
-		});
-	});
-
-	return loading ? (
-		<h1>Loading</h1>
-	) : (
+function App() {
+	return (
 		<Router history={history}>
 			<div className="App">
-				<PublicRoute
-					exact
-					path="/"
-					component={HomePage}
-					authenticated={authenticated}
-				/>
-				<PrivateRoute
-					exact
-					path="/dashboard"
-					component={Dashboard}
-					authenticated={authenticated}
-				/>
-				<PrivateRoute
-					exact
-					path="/create-helper"
-					component={CreateHelperForm}
-					authenticated={authenticated}
-				/>
-				<PrivateRoute
-					exact
-					path="/helpers/:helperId"
-					component={HelperPage}
-					authenticated={authenticated}
-				/>
+				<Switch>
+					<PublicRoute exact path="/" component={HomePage} />
+					<PrivateRoute exact path="/dashboard" component={Dashboard} />
+				</Switch>
 			</div>
 		</Router>
 	);
-};
+}
 
 export default App;

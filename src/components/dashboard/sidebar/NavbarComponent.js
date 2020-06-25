@@ -10,6 +10,7 @@ import {
 	makeStyles,
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const NavbarComponent = ({
 	handleDrawerOpen,
@@ -64,9 +65,11 @@ const NavbarComponent = ({
 					</IconButton>
 				</div>
 				<div>
-					<Typography variant="h6" noWrap className="mr-2">
-						Helpers
-					</Typography>
+					<Link to="/">
+						<Typography variant="h6" noWrap className="mr-2">
+							Helpers
+						</Typography>
+					</Link>
 				</div>
 				<div>
 					<ExitToAppSharpIcon onClick={doSignOut} />

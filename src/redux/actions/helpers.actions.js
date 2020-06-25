@@ -33,8 +33,6 @@ export const getCurrentHelper = (helperId) => {
 			.once("value")
 			.then((snapshot) => {
 				const currentHelper = snapshot.val();
-				console.log("EEEEEEEEEEEEEE");
-				console.log(currentHelper);
 				dispatch(setCurrentHelper(currentHelper));
 			});
 	};
