@@ -39,14 +39,10 @@ export const addStep = (step, helperId) => {
 };
 
 export const removeStep = (stepId, helperId) => {
-	console.log(stepId, helperId);
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
-		console.log(stepId);
 		database
 			.ref(`users/${userUid}/helpers/${helperId}/steps/${stepId}`)
-			// .once("value")
-			// .then((snapshot) => console.log(snapshot.val()));
 			.remove()
 			.then(dispatch(deleteStep(stepId)));
 	};
