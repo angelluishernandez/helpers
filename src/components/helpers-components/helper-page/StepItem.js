@@ -8,7 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
 
 import EditorContent from "./EditorContent";
-import { removeStep, fetchSteps } from "../../../redux/actions/steps.actions";
+import { removeStep } from "../../../redux/actions/steps.actions";
 import { connect } from "react-redux";
 
 const ExpansionPanel = withStyles({
@@ -65,7 +65,6 @@ const StepItems = ({ steps, removeStep, match, helperId }) => {
 	};
 
 	const deleteItem = async (stepId, helperId) => {
-		console.log("DDDDDDDDDDDDDDDDDDDDD", stepId, helperId);
 		await removeStep(stepId, helperId);
 	};
 

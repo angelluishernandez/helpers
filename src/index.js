@@ -9,7 +9,12 @@ import "babel-polyfill";
 import { Provider } from "react-redux";
 import configStore from "./redux/store/configStore";
 import { firebase } from "./firebase/firebase";
-import { setUser, logout, login } from "./redux/actions/auth.actions";
+import {
+	setUser,
+	logout,
+	login,
+	setCurrentUser,
+} from "./redux/actions/auth.actions";
 import { fetchHelpers } from "./redux/actions/helpers.actions";
 
 const store = configStore();
@@ -36,10 +41,16 @@ const Loading = () => {
 ReactDOM.render(<Loading />, document.getElementById("root"));
 
 firebase.auth().onAuthStateChanged((user) => {
-	console.log(user);
+	const currentUser = {
+		name: user.displayName,
+		email: user.email,
+		photoURL: user.photoURL,
+	};
+
 	if (user) {
 		store.dispatch(login(user.uid));
 		store.dispatch(setUser(user.uid));
+		store.dispatch(setCurrentUser(currentUser));
 		store.dispatch(fetchHelpers()).then(() => {
 			renderApp();
 			if (history.location.pathname === "/") {

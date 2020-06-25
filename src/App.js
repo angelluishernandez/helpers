@@ -8,6 +8,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateHelperForm from "./components/helpers-components/create-helper/CreateHelperForm";
 import HelperPage from "./components/helpers-components/helper-page/HelperPage";
+import ProfilePage from "./components/Profile/ProfilePage";
 export const history = createBrowserHistory();
 
 const App = (props) => {
@@ -17,6 +18,7 @@ const App = (props) => {
 				<Switch>
 					<PublicRoute exact path="/" component={HomePage} />
 					<PrivateRoute exact path="/dashboard" component={Dashboard} />
+					<PrivateRoute exact path="/profile" component={ProfilePage} />
 					<PrivateRoute
 						exact
 						path="/create-helper"
