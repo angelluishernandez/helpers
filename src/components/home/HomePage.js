@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import MainContainer from "./MainContainer";
 import HomeCard from "./HomeCard";
 import ActionCall from "./ActionCall";
+import CoolDivider from "../UI/CoolDivider";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,8 +34,8 @@ const HomePage = () => {
 				<Grid item xs={12} className={`${classes.margin}`}>
 					<ActionCall body={"Everything you need in one place"} />
 				</Grid>
-				<hr />
-				<Grid item xs={6}>
+				{/* <CoolDivider /> */}
+				<Grid item md={6} xs={12}>
 					<HomeCard
 						image={"work.svg"}
 						title={"Get more done with less"}
@@ -44,7 +45,7 @@ const HomePage = () => {
 						action={"Check it out"}
 					/>
 				</Grid>
-				<Grid item xs={6}>
+				<Grid item md={6} xs={12}>
 					<HomeCard
 						image={"cards.svg"}
 						title={"Get more productive with...."}

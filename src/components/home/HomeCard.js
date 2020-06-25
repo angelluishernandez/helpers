@@ -24,9 +24,11 @@ const useStyles = makeStyles({
 	},
 	title: {
 		height: "5vh",
+		margin: "1em 0",
 	},
 	body: {
 		height: "10vh",
+		margin: "1em 0",
 	},
 });
 
@@ -45,7 +47,7 @@ const HomeCard = ({ image, title, body, action }) => {
 				<Typography
 					variant="h4"
 					component="h4"
-					className={`card-typography ${classes.title} mt-3`}
+					className={`card-typography ${classes.title} `}
 				>
 					{title}
 				</Typography>
@@ -53,7 +55,7 @@ const HomeCard = ({ image, title, body, action }) => {
 					<Typography
 						variant="body1"
 						component="p"
-						className={`card-typography ${classes.body} mt-3`}
+						className={`card-typography ${classes.body} `}
 					>
 						{body}
 					</Typography>{" "}

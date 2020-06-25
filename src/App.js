@@ -11,7 +11,7 @@ import HelperPage from "./components/helpers-components/helper-page/HelperPage";
 import ProfilePage from "./components/Profile/ProfilePage";
 export const history = createBrowserHistory();
 
-const App = (props) => {
+const App = () => {
 	return (
 		<Router history={history}>
 			<div className="App">

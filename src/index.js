@@ -41,13 +41,14 @@ const Loading = () => {
 ReactDOM.render(<Loading />, document.getElementById("root"));
 
 firebase.auth().onAuthStateChanged((user) => {
-	const currentUser = {
-		name: user.displayName,
-		email: user.email,
-		photoURL: user.photoURL,
-	};
+	console.log(user);
 
 	if (user) {
+		const currentUser = {
+			name: user.displayName,
+			email: user.email,
+			photoURL: user.photoURL,
+		};
 		store.dispatch(login(user.uid));
 		store.dispatch(setUser(user.uid));
 		store.dispatch(setCurrentUser(currentUser));

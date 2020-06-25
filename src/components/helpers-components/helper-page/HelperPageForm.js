@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EditorComponent from "./EditorComponent";
 import Spinner from "../../UI/Spinner";
 import StepItems from "./StepItem";
+import { Typography } from "@material-ui/core";
 
 const HelperPageForm = ({
 	handleSubmit,
@@ -59,7 +60,16 @@ const HelperPageForm = ({
 					{steps.length !== 0 ? (
 						<StepItems steps={steps} helperId={helperId} />
 					) : (
-						<Spinner />
+						<div className="container">
+							<Typography variant="h4" gutterBottom>
+								Ooops! Looks there's nothing here yet
+							</Typography>
+							<img
+								src="/nothing.svg"
+								alt="There is nothing here"
+								className="nothing-img"
+							/>
+						</div>
 					)}
 				</div>
 			</div>

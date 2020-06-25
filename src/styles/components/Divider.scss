@@ -1,0 +1,16 @@
+@keyframes color-animation{
+  from{background-color: red;}
+  to{background-color: blue}
+}
+
+
+
+.CoolDivider{
+  margin: 0 auto;
+  height:2em;
+  width: 75%; 
+  border-radius: 4px;
+  background-color: red; 
+  animation-name: color-animation; 
+  animation-duration: 2s;
+} 
