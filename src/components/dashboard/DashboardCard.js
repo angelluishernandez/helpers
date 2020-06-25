@@ -33,9 +33,7 @@ const useStyles = makeStyles({
 // It is quite nice effect
 
 const goToHelperDetails = (id) => {
-	setInterval(() => {
-		history.push(`/helpers/${id}`);
-	}, 1000);
+	history.push(`/helpers/${id}`);
 };
 
 const DashboardCard = ({ helper }) => {

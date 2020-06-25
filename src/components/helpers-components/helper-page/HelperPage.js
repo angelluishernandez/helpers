@@ -32,13 +32,15 @@ const HelperPage = ({
 	const getData = async () => {
 		await getCurrentHelper(helperId);
 		await fetchHelpers(helperId);
+		await fetchSteps(helperId);
 	};
 
 	// Use effect on first load
 
-	if (loading) {
+	useEffect(() => {
 		getData().then(() => setLoading(false));
-	}
+		// eslint-disable-next-line
+	}, []);
 
 	const formProps = {
 		handleSubmit,
@@ -53,7 +55,6 @@ const HelperPage = ({
 };
 
 const mapStateToProps = (state, props) => {
-	console.log(state);
 	return {
 		steps: state.steps,
 		currentHelper: state.currentHelper,

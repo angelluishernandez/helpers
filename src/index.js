@@ -36,18 +36,19 @@ const Loading = () => {
 ReactDOM.render(<Loading />, document.getElementById("root"));
 
 firebase.auth().onAuthStateChanged((user) => {
+	console.log(user);
 	if (user) {
 		store.dispatch(login(user.uid));
 		store.dispatch(setUser(user.uid));
-		store.dispatch(fetchHelpers(user.uid)).then(() => {
+		store.dispatch(fetchHelpers()).then(() => {
 			renderApp();
 			if (history.location.pathname === "/") {
 				history.push("/dashboard");
 			}
 		});
 	} else {
-		store.dispatch(logout());
 		renderApp();
+		store.dispatch(logout());
 		history.push("/");
 	}
 });
