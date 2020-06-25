@@ -8,7 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
 
 import EditorContent from "./EditorContent";
-import { removeStep } from "../../../redux/actions/steps.actions";
+import { removeStep, fetchSteps } from "../../../redux/actions/steps.actions";
 import { connect } from "react-redux";
 
 const ExpansionPanel = withStyles({
@@ -57,45 +57,48 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 	},
 }))(MuiExpansionPanelDetails);
 
-const StepItems = ({ steps, removeStep }) => {
+const StepItems = ({ steps, removeStep, match, helperId }) => {
 	const [expanded, setExpanded] = useState("");
 
 	const handleChange = (key) => (event, newExpanded) => {
 		setExpanded(newExpanded ? key : false);
 	};
 
-	const deleteItem = (stepId) => {
-		removeStep(stepId);
+	const deleteItem = async (stepId, helperId) => {
+		console.log("DDDDDDDDDDDDDDDDDDDDD", stepId, helperId);
+		await removeStep(stepId, helperId);
 	};
 
 	return (
 		<>
-			{steps.map((step, index) => (
-				<ExpansionPanel
-					square
-					expanded={expanded === index}
-					key={index}
-					onChange={handleChange(index)}
-				>
-					<ExpansionPanelSummary>
-						<Grid item xs={8}>
-							<Typography>{step.name}</Typography>{" "}
-						</Grid>
-						<Grid item xs={4}>
-							<DeleteIcon onClick={() => deleteItem(step.id)} />
-						</Grid>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails>
-						<EditorContent content={step.description} />
-					</ExpansionPanelDetails>
-				</ExpansionPanel>
-			))}
+			{steps.map((step, index) => {
+				return (
+					<ExpansionPanel
+						square
+						expanded={expanded === index}
+						key={index}
+						onChange={handleChange(index)}
+					>
+						<ExpansionPanelSummary>
+							<Grid item xs={8}>
+								<Typography>{step.name}</Typography>{" "}
+							</Grid>
+							<Grid item xs={4}>
+								<DeleteIcon onClick={() => deleteItem(step.id, helperId)} />
+							</Grid>
+						</ExpansionPanelSummary>
+						<ExpansionPanelDetails>
+							<EditorContent content={step.description} />
+						</ExpansionPanelDetails>
+					</ExpansionPanel>
+				);
+			})}
 		</>
 	);
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	removeStep: (stepId) => dispatch(removeStep(stepId)),
+	removeStep: (stepId, helperId) => dispatch(removeStep(stepId, helperId)),
 });
 
 export default connect(undefined, mapDispatchToProps)(StepItems);

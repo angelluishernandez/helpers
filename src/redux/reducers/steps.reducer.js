@@ -7,7 +7,7 @@ const stepsReducer = (state = stepsReducerDefaultState, action) => {
 		case "ADD_STEPS":
 			return [...state, action.step];
 		case "DELETE_STEP":
-			return state.filter(({ id }) => id !== action.stepId);
+			return state.filter((step) => step.id !== action.stepId);
 		default:
 			return state;
 	}

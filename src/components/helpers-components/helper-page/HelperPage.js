@@ -49,6 +49,7 @@ const HelperPage = ({
 		currentHelper,
 		loading,
 		steps,
+		helperId,
 	};
 
 	return <HelperPageForm {...formProps} />;

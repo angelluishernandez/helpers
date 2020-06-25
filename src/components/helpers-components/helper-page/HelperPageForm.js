@@ -10,6 +10,7 @@ const HelperPageForm = ({
 	currentHelper,
 	loading,
 	steps,
+	helperId,
 }) => {
 	const [editorContent, setEditorContent] = useState("");
 
@@ -55,7 +56,11 @@ const HelperPageForm = ({
 
 					{/* Add a button to display the steps  */}
 
-					{steps.length !== 0 ? <StepItems steps={steps} /> : <Spinner />}
+					{steps.length !== 0 ? (
+						<StepItems steps={steps} helperId={helperId} />
+					) : (
+						<Spinner />
+					)}
 				</div>
 			</div>
 		</div>

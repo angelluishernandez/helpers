@@ -38,14 +38,17 @@ export const addStep = (step, helperId) => {
 	};
 };
 
-export const removeStep = ({ stepId } = {}, helperId) => {
+export const removeStep = (stepId, helperId) => {
+	console.log(stepId, helperId);
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
-
+		console.log(stepId);
 		database
-			.ref(`users/${userUid}/helpers/${helperId}/${stepId}`)
+			.ref(`users/${userUid}/helpers/${helperId}/steps/${stepId}`)
+			// .once("value")
+			// .then((snapshot) => console.log(snapshot.val()));
 			.remove()
-			.then(() => dispatch(deleteStep({ stepId })));
+			.then(dispatch(deleteStep(stepId)));
 	};
 };
 
@@ -61,7 +64,7 @@ export const addStepToStore = (step) => ({
 	step,
 });
 
-export const deleteStep = ({ stepId }) => ({
+export const deleteStep = (stepId) => ({
 	type: "DELETE_STEP",
 	stepId,
 });
