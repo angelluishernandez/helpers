@@ -69,30 +69,37 @@ const StepItems = ({ steps, removeStep, match, helperId }) => {
 	};
 
 	return (
-		<>
-			{steps.map((step, index) => {
-				return (
-					<ExpansionPanel
-						square
-						expanded={expanded === index}
-						key={index}
-						onChange={handleChange(index)}
-					>
-						<ExpansionPanelSummary>
-							<Grid item xs={8}>
-								<Typography>{step.name}</Typography>{" "}
-							</Grid>
-							<Grid item xs={4}>
-								<DeleteIcon onClick={() => deleteItem(step.id, helperId)} />
-							</Grid>
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
-							<EditorContent content={step.description} />
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
-				);
-			})}
-		</>
+		<div className="container">
+			<div className="row">
+				{steps.map((step, index) => {
+					console.log(step.description);
+					return (
+						<div className="col-md-6 col-sm-12 my-2" key={index}>
+							<ExpansionPanel
+								square
+								expanded={expanded === index}
+								key={index}
+								onChange={handleChange(index)}
+							>
+								<ExpansionPanelSummary>
+									<Grid item xs={8}>
+										<Typography>
+											Step {index + 1}: {step.name}
+										</Typography>{" "}
+									</Grid>
+									<Grid item xs={4}>
+										<DeleteIcon onClick={() => deleteItem(step.id, helperId)} />
+									</Grid>
+								</ExpansionPanelSummary>
+								<ExpansionPanelDetails>
+									<EditorContent content={step.description} />
+								</ExpansionPanelDetails>
+							</ExpansionPanel>
+						</div>
+					);
+				})}
+			</div>
+		</div>
 	);
 };
 

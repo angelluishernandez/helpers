@@ -16,7 +16,7 @@ const HelperPageForm = ({
 	const [editorContent, setEditorContent] = useState("");
 
 	return !loading ? (
-		<div className="container">
+		<div className="container mt-5">
 			<div className="row">
 				<div className="col-10 mx-auto">
 					<h4>{currentHelper.title}</h4>

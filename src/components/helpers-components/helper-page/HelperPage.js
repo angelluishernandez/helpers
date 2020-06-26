@@ -42,6 +42,8 @@ const HelperPage = ({
 		// eslint-disable-next-line
 	}, []);
 
+	console.log(step);
+
 	const formProps = {
 		handleSubmit,
 		step,

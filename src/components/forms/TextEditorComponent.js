@@ -12,24 +12,25 @@ const TextEditorComponent = ({ handleEditorChange }) => {
 	return (
 		<Editor
 			init={{
-				height: 500,
+				height: 300,
+				menubar: "tools",
+				codesample_languages: [
+					{ text: "HTML/XML", value: "markup" },
+					{ text: "JavaScript", value: "javascript" },
+					{ text: "CSS", value: "css" },
+				],
 
 				plugins: [
 					"advlist autolink lists link image charmap print preview anchor",
 					"searchreplace visualblocks code fullscreen",
-					"insertdatetime media table paste code help wordcount",
-					"codesample",
+					"insertdatetime media table paste code help wordcount media",
 				],
-
 				toolbar:
-					"codesample |undo redo |  formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformat | help ",
-				content_css: [
-					"//fonts.googleapis.com/css?family=Lato:300,300i,400,400i",
-					"//www.tiny.cloud/css/codepen.min.css",
-				],
+					"| formatselect | bold italic backcolor | aligncenter alignright alignjustify |  bullist numlist outdent indent | media | code",
+				// valid_children: "+body[style]",
 			}}
-			textareaName="editor"
-			onEditorChange={onEditorChange}
+			onEditorChange={handleEditorChange}
+			textareaName="description"
 		/>
 	);
 };

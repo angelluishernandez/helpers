@@ -1,7 +1,14 @@
 import React from "react";
+import ReactHtmlParser, {
+	processNodes,
+	convertNodeToElement,
+	htmlparser2,
+} from "react-html-parser";
 
 const EditorContent = ({ content }) => {
-	return <p dangerouslySetInnerHTML={{ __html: content }}></p>;
+	const html = content;
+
+	return <div>{ReactHtmlParser(html)}</div>;
 };
 
 export default EditorContent;
