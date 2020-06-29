@@ -21,18 +21,15 @@ const HelperPage = ({
 
 	const [step, setStep] = useState({});
 
-	console.log("This is the step on the page", step.description);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(step);
 		addStep(step, helperId);
 		fetchSteps(helperId);
 	};
 
 	// Fetch current helpers info
 
-	const getData = async () => {
+	const fetchData = async () => {
 		await getCurrentHelper(helperId);
 		await fetchHelpers(helperId);
 		await fetchSteps(helperId);
@@ -41,7 +38,7 @@ const HelperPage = ({
 	// Use effect on first load
 
 	useEffect(() => {
-		getData().then(() => setLoading(false));
+		fetchData().then(() => setLoading(false));
 		// eslint-disable-next-line
 	}, []);
 

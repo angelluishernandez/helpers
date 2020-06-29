@@ -24,6 +24,26 @@ export const fetchHelpers = () => {
 	};
 };
 
+export const fetchPublicHelpers = () => {
+	return (dispatch) => {
+		console.log("Entra");
+		return database
+			.ref(`publicHelpers`)
+			.once("value")
+			.then((snapshot) => {
+				const publicHelpers = [];
+				snapshot.forEach((childSnapshot) => {
+					publicHelpers.push({
+						id: childSnapshot.key,
+						...childSnapshot.val(),
+					});
+
+					dispatch(setPublicHelpers(publicHelpers));
+				});
+			});
+	};
+};
+
 export const getCurrentHelper = (helperId) => {
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
@@ -43,6 +63,11 @@ export const getCurrentHelper = (helperId) => {
 export const setHelpers = (helpers) => ({
 	type: "SET_HELPERS",
 	helpers,
+});
+
+export const setPublicHelpers = (publicHelpers) => ({
+	type: "SET_PUBLIC_HELPERS",
+	publicHelpers,
 });
 
 export const setCurrentHelper = (currentHelper) => ({

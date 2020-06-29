@@ -41,7 +41,7 @@ const SideBarItems = ({ helpers, fetchHelpers }) => {
 };
 
 const mapStateToProps = (state) => ({
-	helpers: state.helpers,
+	helpers: state.helpers.helpers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

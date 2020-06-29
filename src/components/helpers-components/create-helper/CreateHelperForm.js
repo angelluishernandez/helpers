@@ -8,14 +8,19 @@ import { history } from "../../../App";
 import TextInputs from "./TextInputs";
 
 const CreateHelperForm = ({ userUid }) => {
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
+	const [helper, setHelper] = useState({
+		isPublic: false,
+		category: "",
+		title: "",
+		description: "",
+	});
 
 	// Image upload
 
 	const [image, setImage] = useState({});
 	const [imageURL, setImageURL] = useState("");
 	const [uploadingImg, setUploadingImg] = useState(false);
+	const [imageHasBeenUploaded, setImageHasBeenUploaded] = useState(false);
 
 	// Image / File handler
 
@@ -42,6 +47,7 @@ const CreateHelperForm = ({ userUid }) => {
 					.then((url) => {
 						setImageURL(url);
 						setUploadingImg(false);
+						setImageHasBeenUploaded(true);
 					});
 			}
 		);
@@ -49,19 +55,41 @@ const CreateHelperForm = ({ userUid }) => {
 
 	// Handle submit
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const submitPublicHelper = () => {
+		const helperId = uuid();
+		database
+			.ref(`publicHelpers/${helperId}`)
+			.set({
+				isPublic: helper.isPublic,
+				category: helper.category,
+				title: helper.title,
+				description: helper.description,
+				image: imageURL,
+				id: helperId,
+				authorId: userUid,
+			})
+			.then(() => history.push(`/dashboard`));
+	};
 
+	const submitPrivateHelper = () => {
 		const helperId = uuid();
 		database
 			.ref(`users/${userUid}/helpers/${helperId}`)
 			.set({
-				title,
-				description,
+				isPublic: helper.isPublic,
+				category: helper.category,
+				title: helper.title,
+				description: helper.description,
 				image: imageURL,
 				id: helperId,
+				authorId: userUid,
 			})
 			.then(() => history.push(`/helpers/${helperId}`));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		helper.isPublic ? submitPublicHelper() : submitPrivateHelper();
 	};
 
 	return (
@@ -71,18 +99,14 @@ const CreateHelperForm = ({ userUid }) => {
 			<div className="row">
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit} className="CreateHelperItem__form">
-						<TextInputs
-							setDescription={setDescription}
-							setTitle={setTitle}
-							title={title}
-							description={description}
-						/>
+						<TextInputs helper={helper} setHelper={setHelper} />
 
 						<div>
 							<FileUploadComponent
 								handleFileUpload={handleFileUpload}
 								uploadImg={uploadImg}
 								image={image}
+								imageHasBeenUploaded={imageHasBeenUploaded}
 							/>
 						</div>
 

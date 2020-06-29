@@ -51,7 +51,7 @@ const ProfilePage = ({ currentUser, helpers }) => {
 
 const mapStateToProps = (state) => ({
 	currentUser: state.auth.currentUser,
-	helpers: state.helpers,
+	helpers: state.helpers.helpers,
 });
 
 export default connect(mapStateToProps)(ProfilePage);

@@ -15,7 +15,10 @@ import {
 	login,
 	setCurrentUser,
 } from "./redux/actions/auth.actions";
-import { fetchHelpers } from "./redux/actions/helpers.actions";
+import {
+	fetchHelpers,
+	fetchPublicHelpers,
+} from "./redux/actions/helpers.actions";
 
 const store = configStore();
 
@@ -41,8 +44,6 @@ const Loading = () => {
 ReactDOM.render(<Loading />, document.getElementById("root"));
 
 firebase.auth().onAuthStateChanged((user) => {
-	console.log(user);
-
 	if (user) {
 		const currentUser = {
 			name: user.displayName,
@@ -52,6 +53,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		store.dispatch(login(user.uid));
 		store.dispatch(setUser(user.uid));
 		store.dispatch(setCurrentUser(currentUser));
+		store.dispatch(fetchPublicHelpers());
 		store.dispatch(fetchHelpers()).then(() => {
 			renderApp();
 			if (history.location.pathname === "/") {

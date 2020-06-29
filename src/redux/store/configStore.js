@@ -6,9 +6,9 @@ import { helpersReducer, helperReducer } from "../reducers/helpers.reducers";
 import stepsReducer from "../reducers/steps.reducer";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const createLoggerMiddleware = createLogger();
+const createLoggerMiddleware = createLogger();
 
-let middleware = [thunk /*createLoggerMiddleware*/];
+let middleware = [thunk, createLoggerMiddleware];
 
 const rootReducer = combineReducers({
 	auth: authReducer,

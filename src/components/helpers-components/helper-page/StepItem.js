@@ -72,7 +72,6 @@ const StepItems = ({ steps, removeStep, match, helperId }) => {
 		<div className="container">
 			<div className="row">
 				{steps.map((step, index) => {
-					console.log(step.description);
 					return (
 						<div className="col-md-6 col-sm-12 my-2" key={index}>
 							<ExpansionPanel
