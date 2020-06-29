@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import EditorComponent from "./EditorComponent";
 import Spinner from "../../UI/Spinner";
 import StepItems from "./StepItem";
@@ -13,8 +13,6 @@ const HelperPageForm = ({
 	steps,
 	helperId,
 }) => {
-	const [editorContent, setEditorContent] = useState("");
-
 	return !loading ? (
 		<div className="container mt-5">
 			<div className="row">
@@ -45,12 +43,7 @@ const HelperPageForm = ({
 						<div className="form-group">
 							<label htmlFor="description">Description</label>
 
-							<EditorComponent
-								setEditorContent={setEditorContent}
-								editorContent={editorContent}
-								step={step}
-								setStep={setStep}
-							/>
+							<EditorComponent step={step} setStep={setStep} />
 						</div>
 						<button className="button">Create step</button>
 					</form>

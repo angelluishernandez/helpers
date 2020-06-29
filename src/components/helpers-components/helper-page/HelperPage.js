@@ -21,8 +21,11 @@ const HelperPage = ({
 
 	const [step, setStep] = useState({});
 
+	console.log("This is the step on the page", step.description);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(step);
 		addStep(step, helperId);
 		fetchSteps(helperId);
 	};
@@ -41,8 +44,6 @@ const HelperPage = ({
 		getData().then(() => setLoading(false));
 		// eslint-disable-next-line
 	}, []);
-
-	console.log(step);
 
 	const formProps = {
 		handleSubmit,

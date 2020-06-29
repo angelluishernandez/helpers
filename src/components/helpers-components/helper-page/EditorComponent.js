@@ -1,21 +1,17 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-const EditorComponent = ({
-	setEditorContent,
-	setStep,
-	step,
-	editorContent,
-}) => {
+const TINY_API_KEY = process.env.TINY_API_KEY;
+
+const EditorComponent = ({ setStep, step, editorContent }) => {
 	const handleEditorChange = (content, editor) => {
-		console.log(editorContent);
-		console.log(content);
-		setEditorContent(content);
-		setStep({ ...step, description: editorContent });
+		setStep({ ...step, description: content });
+		console.log("This is the step on change", step.description);
 	};
 
 	return (
 		<Editor
+			apiKey={TINY_API_KEY}
 			init={{
 				height: 300,
 				menubar: "tools",
@@ -24,17 +20,16 @@ const EditorComponent = ({
 					{ text: "JavaScript", value: "javascript" },
 					{ text: "CSS", value: "css" },
 				],
-				valid_styles: "*",
-				valid_elements: "*",
-				valid_children: "+body[style]",
+				// valid_styles: "*",
+				// valid_elements: "*",
+				valid_children: "*",
 				plugins: [
 					"advlist autolink lists link image charmap print preview anchor",
 					"searchreplace visualblocks code fullscreen",
-					"insertdatetime media table paste code help wordcount media",
+					"insertdatetime media table paste code help wordcount media emoticons",
 				],
 				toolbar:
-					"| formatselect | bold italic backcolor | aligncenter alignright alignjustify |  bullist numlist outdent indent | media | code",
-				valid_children: "+body[style]",
+					"| formatselect | bold italic backcolor | aligncenter alignright alignjustify |  bullist numlist outdent indent | media | code | emoticons",
 			}}
 			onEditorChange={handleEditorChange}
 			textareaName="description"
