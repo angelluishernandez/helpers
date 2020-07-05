@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchHelpers } from "../../redux/actions/helpers.actions";
 import DashboardCard from "./DashboardCard";
 
 const Dashboard = ({ userUid, helpers, publicHelpers }) => {
@@ -15,10 +14,9 @@ const Dashboard = ({ userUid, helpers, publicHelpers }) => {
 	//Use the dashboard to show the latest helpers
 	return (
 		<div className="container mt-5">
-			<div className="row  d-flex justify-content-center">{helpersJSX}</div>
-			<div className="row d-flex justify-content-center">
-				{publicHelpersJSX}
-			</div>
+			<div className="row ">{helpersJSX}</div>
+			<hr className="col-8" />
+			<div className="row">{publicHelpersJSX}</div>
 		</div>
 	);
 };
