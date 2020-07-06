@@ -41,7 +41,7 @@ const DashboardCard = ({ helper }) => {
 
 	const classes = useStyles();
 	return (
-		<Card className={`m-2 ${classes.root}`}>
+		<Card className={`m-2 ${classes.root} ${helper.category}`}>
 			<CardActionArea
 				className={classes.body}
 				onClick={() => goToHelperDetails(id)}
