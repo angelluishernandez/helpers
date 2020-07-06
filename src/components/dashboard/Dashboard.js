@@ -2,25 +2,29 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import DashboardCard from "./DashboardCard";
 import { useEffect } from "react";
+import {
+	fetchHelpers,
+	fetchPublicHelpers,
+} from "../../redux/actions/helpers.actions";
 
-const Dashboard = ({ userUid, helpers, publicHelpers }) => {
-	const [loading, setLoading] = useState(false);
+const Dashboard = ({
+	userUid,
+	helpers,
+	publicHelpers,
+	fetchPublicHelpers,
+	fetchHelpers,
+}) => {
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (helpers !== undefined || publicHelpers !== undefined) {
-			setLoading(false);
-		}
+		const getData = async () => {
+			await fetchHelpers();
+			await fetchPublicHelpers();
+		};
 
+		getData().then(() => setLoading(false));
 		//eslint-disable-next-line
 	}, []);
-
-	const helpersJSX = helpers.map((helper, index) => (
-		<DashboardCard helper={helper} key={index} />
-	));
-
-	const publicHelpersJSX = publicHelpers.map((helper, index) => (
-		<DashboardCard helper={helper} key={index} />
-	));
 
 	//Use the dashboard to show the latest helpers
 	return (
@@ -29,9 +33,17 @@ const Dashboard = ({ userUid, helpers, publicHelpers }) => {
 				<h1>Loading...</h1>
 			) : (
 				<div className="container mt-5">
-					<div className="row ">{helpersJSX}</div>
+					<div className="row ">
+						{helpers.map((helper, index) => (
+							<DashboardCard helper={helper} key={index} />
+						))}
+					</div>
 					<hr className="col-8" />
-					<div className="row">{publicHelpersJSX}</div>
+					<div className="row">
+						{publicHelpers.map((helper, index) => (
+							<DashboardCard helper={helper} key={index} />
+						))}
+					</div>
 				</div>
 			)}
 		</>
@@ -44,4 +56,9 @@ const mapStateToProps = (state) => ({
 	publicHelpers: state.helpers.publicHelpers,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => ({
+	fetchHelpers: () => dispatch(fetchHelpers()),
+	fetchPublicHelpers: () => dispatch(fetchPublicHelpers()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

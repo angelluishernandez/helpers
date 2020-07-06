@@ -5,6 +5,8 @@ import { database } from "../../firebase/firebase";
 //----------------------Fetch Helpers----------------------//
 
 export const fetchHelpers = () => {
+	console.log("This is fetchHelpers");
+
 	return (dispatch, getState) => {
 		const userUid = getState().auth.user;
 
@@ -26,7 +28,6 @@ export const fetchHelpers = () => {
 
 export const fetchPublicHelpers = () => {
 	return (dispatch) => {
-		console.log("Entra");
 		return database
 			.ref(`publicHelpers`)
 			.once("value")
